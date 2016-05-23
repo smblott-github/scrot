@@ -48,10 +48,10 @@ static inline bool display_X11_process_events(GC gc, int start_x, int start_y, s
 		case MotionNotify:
 			XDrawRectangle(disp, scr->root, gc, area->x, area->y, area->width, area->height);
 
-			area->x = min(start_x, ev.xmotion.x);
-			area->y = min(start_y, ev.xmotion.y);
-			area->width = abs(ev.xmotion.x - start_x);
-			area->height = abs(ev.xmotion.y - start_y);
+			area->x = min(start_x, ev.xmotion.x) + 1;
+			area->y = min(start_y, ev.xmotion.y) + 1;
+			area->width = abs(ev.xmotion.x - start_x) - 1;
+			area->height = abs(ev.xmotion.y - start_y) - 1;
 
 			XDrawRectangle(disp, scr->root, gc, area->x, area->y, area->width, area->height);
 			XFlush(disp);
